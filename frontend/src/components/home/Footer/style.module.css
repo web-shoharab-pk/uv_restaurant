@@ -1,0 +1,74 @@
+.footer{
+    background: rgb(37, 37, 37);
+    color: #fff;
+
+}
+.restaurant_bio{
+
+}
+.footer_h1 {
+    font-family: "Yuji Mai", serif;
+    font-weight: 700;
+    font-size: 30px;
+    transition: 0.4s;
+    padding-top: 30px;
+    padding-bottom: 10px;
+  }
+
+  .footerRight h4 {
+    padding-top: 25px;
+    padding-bottom: 14px;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .footerRight p {
+    padding-right: 5%;
+    margin-bottom: 3px;
+    font-weight: 500;
+  }
+  
+  .footerRight a {
+    transition: 0.3s;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .footerRight a:hover {
+    color: #0d8122;
+  }
+  .copyright p {
+    margin-bottom: 0;
+    padding: 10px 0 20px 0;
+    font-size: 18px;
+  }
+  .footerNav a {
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+  }
+
+  .footer a:hover {
+    color: #2d1ffa;
+  }
+
+  .footerNav li {
+    display: inline-block;
+    list-style: none;
+    padding: 0 20px;
+  }
+
+  .footerNav ul {
+    text-align: right;
+    margin-bottom: 0;
+    /* padding-top: 10px; */
+  }
+
+  .footerMid h4 {
+    /* padding-top: 75px; */
+    padding-bottom: 18px;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .footerMid p {
+    line-height: 10px;
+  }

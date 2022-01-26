@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Cookie&family=Oswald:wght@500&display=swap");
+
+.gallery_title_h3 {
+  font-family: "Cookie", cursive;
+  font-size: 24px;
+  font-weight: 600;
+  color: #3b3b3a;
+}
+
+.gallery_title_h1 {
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+}

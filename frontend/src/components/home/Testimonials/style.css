@@ -1,0 +1,86 @@
+.testimonials {
+    width: 100%;
+    height: 55vh;
+    max-height: 100%;
+    background-image: url('./../../../resources/image/bg-2.png'); 
+    background-attachment: fixed;
+    background-size: cover;
+}
+.testimonial_div {
+    /* height: 350px; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.review_card{
+    height: 350px; 
+    width: 100%;
+    background: transparent;
+}
+.review-title > span { 
+    color: #ed5217;
+    text-transform: capitalize; 
+    font-family: "Cookie", cursive;
+    font-size: 32px;
+    font-weight: 600; 
+    margin-top: 15px;
+  }
+  
+  .review-title h2 {
+    /* margin: 0.3em 0 0; */
+    font-size: 2rem;
+    font-weight: 600;
+    color: #444;
+    padding-bottom: 20px;
+    margin-bottom: 50px;
+    position: relative;
+    margin-top: 15px;
+  }
+  
+  .review-title {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .review-title h2:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 5rem;
+    height: 3px;
+    background: #ed5217;
+    border-radius: 20px;
+    left: 50% !important;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+  
+.review_img {
+    max-width: 100px;
+    border-radius: 50%;
+    margin: 15px auto 0;
+    box-shadow: 0 8px 20px -4px #95abbb;
+    width: 100px;
+    height: 100px;
+  }
+  .myCarousel h3 {
+    color: #ed5217;
+    font-size: 24px;
+    /* line-height: 1.3; */
+    margin-top: 15px;
+  }
+  
+  
+  .myCarousel p {
+    font-size: 28px;
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    color: #fff;
+    line-height: 39px;
+    margin-bottom: 26px;
+    margin-top: 26px;
+    padding: 0 2%;
+  }
+ 

@@ -1,0 +1,116 @@
+.dashboard {
+  /* position: absolute; */
+  /* top: 10px; */
+  /* left: 20px; */
+  /* bottom: 10px; */
+  /* right: 0; */
+  /* padding: 30px;  */
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+ 
+::-webkit-scrollbar {
+  display: none;
+}
+ ::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #fff; 
+  background-color: #F90;	
+	background-image: -webkit-linear-gradient(90deg,
+	                                          rgba(255, 255, 255, .2) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(255, 255, 255, .2) 50%,
+											  rgba(255, 255, 255, .2) 75%,
+											  transparent 75%,
+											  transparent)
+ 
+}
+ ::-webkit-scrollbar-thumb:hover {
+  -webkit-border-radius: 10px;
+  background-color: #fff;
+	border-radius: 10px;
+	background-image: -webkit-linear-gradient(90deg,
+	                                          rgba(0, 0, 0, .2) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(0, 0, 0, .2) 50%,
+											  rgba(0, 0, 0, .2) 75%,
+											  transparent 75%,
+											  transparent);
+ transition: 1s;
+}
+.food_menu {
+  width: 100%;
+  /* height: 90vh; */
+  max-height: 100% !important;
+  /* background-image: url('./../../resources/image/bg_food.jpg'); */
+  /* background-image: url("./../../resources/image/bg-2.png"); */
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-color: rgba(231, 228, 228, 0.774);
+}
+
+.page_404 {
+  padding: 40px 0;
+  background: #fff;
+  font-family: "Arvo", serif;
+}
+
+.page_404_img {
+  width: 100%;
+}
+
+.four_zero_four_bg {
+  background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+  height: 400px;
+  background-position: center;
+}
+
+.four_zero_four_bg_h1 {
+  font-size: 80px;
+}
+
+.four_zero_four_bg_h3 {
+  font-size: 80px;
+}
+
+.link_404 {
+  color: #fff !important;
+  padding: 10px 20px;
+  background: #39ac31;
+  margin: 20px 0;
+  display: inline-block;
+}
+.contant_box_404 {
+  margin-top: -50px;
+}
+.blog_page{
+  background: #eeeeee;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+ 
+.blog_page::-webkit-scrollbar {
+  display: none;
+}
+
+
+.reservation_page{
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.reservation_page::-webkit-scrollbar {
+  display: none;
+}
+
+/* .sign_page {
+  height: 100vh;
+  width: 100%;
+	background: linear-gradient(90deg, #bab7fb, #7367ce);	
+} */
