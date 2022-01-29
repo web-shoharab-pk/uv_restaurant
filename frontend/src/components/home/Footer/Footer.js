@@ -1,4 +1,6 @@
+import { Avatar } from '@mui/material';
 import React from 'react';
+import logo from './../../../resources/image/food_logo.png';
 import style from './style.module.css';
 
 const Footer = () => {
@@ -8,11 +10,13 @@ const Footer = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-4 col-md-4 col-sm-12">
-                        <h1 className={style.footer_h1}>Restaurant</h1>
-                        <p className={style.restaurant_bio}>
-                            Welcome to Our Software. Company About here.
-                            Welcome to Our Software. Company About here.
-                        </p>
+                        <div className={style.footerMid}>
+                            <h4>Friends Foods</h4>
+                            <p className={style.restaurant_bio}>
+                                Welcome to Our Software. Company About here.
+                            </p>
+                            <Avatar style={{ width: 100, height: 100 }} alt="Remy Sharp" src={logo} />
+                        </div>
                     </div>
                     <div className="col-lg-4 col-md-4 col-sm-12">
                         <div className={style.footerMid}>
@@ -34,15 +38,14 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="col-lg-4 col-md-4 col-sm-12">
-                        <div className={style.footerRight}>
+                        <div className={style.footerMid}>
                             <h4>Contact Us</h4>
-                            <p>356, Mannan Plaza ( 4th Floar ) Khilkhet Dhaka</p>
+                            <p>356, Mannan Plaza ( 4th Floar ),</p>
                             <p>
-                                <a href="#/">support@bdtask.com</a>
+                                Khilkhet Dhaka
                             </p>
-                            <p>
-                                <a href="#/">+88 01715 222 333</a>
-                            </p>
+                            <p>support@bdtask.com</p>
+                            <p>+88 01715 222 333</p>
                         </div>
                     </div>
                 </div>

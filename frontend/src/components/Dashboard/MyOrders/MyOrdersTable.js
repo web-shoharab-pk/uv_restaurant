@@ -4,7 +4,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import { Container, TableFooter, TablePagination } from '@mui/material';
+import { Button, Container, TablePagination } from '@mui/material';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -19,32 +19,10 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import React from 'react';
+ 
 
-function createData(name, calories, fat, carbs, protein, price) {
-    return {
-        name,
-        calories,
-        fat,
-        carbs,
-        protein,
-        price,
-        history: [
-            {
-                date: '2020-01-05',
-                customerId: '11091700',
-                amount: 3,
-            },
-            {
-                date: '2020-01-02',
-                customerId: 'Anonymous',
-                amount: 1,
-            },
-        ],
-    };
-}
-
-function Row(props) {
-    const { row } = props;
+function Row({ order }) {
+    const { foodDetails, orderedBy, createdAt } = order;
     const [open, setOpen] = React.useState(false);
 
     return (
@@ -60,12 +38,15 @@ function Row(props) {
                     </IconButton>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                    {row.name}
+                    {orderedBy.name}
                 </TableCell>
-                <TableCell align="center">{row.calories}</TableCell>
-                <TableCell align="center">{row.fat}</TableCell>
-                <TableCell align="center">{row.carbs}</TableCell>
-                <TableCell align="center">{row.protein}</TableCell>
+                <TableCell align="center">{foodDetails.name}</TableCell>
+                <TableCell align="center">{foodDetails.price}</TableCell>
+                <TableCell align="center">VISA CARD</TableCell>
+                <TableCell align="center">
+                    <Button variant="outlined">
+                        btn</Button>
+                </TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -78,24 +59,22 @@ function Row(props) {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Date</TableCell>
-                                        <TableCell>Customer</TableCell>
-                                        <TableCell align="right">Amount</TableCell>
+                                        <TableCell>Name</TableCell>
+                                        <TableCell align="right">OrderedBy</TableCell>
                                         <TableCell align="right">Total price ($)</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {row.history.map((historyRow) => (
-                                        <TableRow key={historyRow.date}>
-                                            <TableCell component="th" scope="row">
-                                                {historyRow.date}
-                                            </TableCell>
-                                            <TableCell align="Center">{historyRow.customerId}</TableCell>
-                                            <TableCell align="Center">{historyRow.amount}</TableCell>
-                                            <TableCell align="Center">
-                                                {Math.round(historyRow.amount * row.price * 100) / 100}
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
+                                    <TableRow>
+                                        <TableCell component="th" scope="row">
+                                            {createdAt}
+                                        </TableCell>
+                                        <TableCell>{foodDetails.name}</TableCell>
+                                        <TableCell align="right">{orderedBy.userId}</TableCell>
+                                        <TableCell align="right">
+                                            {foodDetails.price}
+                                        </TableCell>
+                                    </TableRow>
                                 </TableBody>
                             </Table>
                         </Box>
@@ -123,14 +102,7 @@ Row.propTypes = {
         protein: PropTypes.number.isRequired,
     }).isRequired,
 };
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-    createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-    createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-    createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-];
+ 
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -194,14 +166,13 @@ TablePaginationActions.propTypes = {
 };
 
 
-const MyOrdersTable = ({allOrders}) => {
-    console.log("all Orders", allOrders)
+const MyOrdersTable = ({ allOrders }) => { 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - allOrders.length) : 0;
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -217,62 +188,53 @@ const MyOrdersTable = ({allOrders}) => {
 
             <Container>
                 <Box>
-                    <h3>All Orders</h3>
+                  
                     <TableContainer component={Paper}>
+                    <h3 style={{textAlign: 'center', marginTop: '8px'}}>All Orders</h3>
                         <Table aria-label="collapsible table">
+                        
                             <TableHead>
                                 <TableRow>
                                     <TableCell />
                                     <TableCell>Name</TableCell>
                                     <TableCell align="center">Food Name</TableCell>
-                                    <TableCell align="center">Amount</TableCell>
+                                    <TableCell align="center">Price</TableCell>
                                     <TableCell align="center">Payment BY</TableCell>
                                     <TableCell align="center">Action</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
+
+                                {(rowsPerPage > 0
+                                    ? allOrders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    : allOrders
+                                ).map((order) => (
+                                    <Row key={order._id} order={order} />
+                                ))}
                                 {emptyRows > 0 && (
                                     <TableRow style={{ height: 53 * emptyRows }}>
                                         <TableCell colSpan={6} />
                                     </TableRow>
                                 )}
-
-                                {(rowsPerPage > 0
-                                    ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    : rows
-                                ).map((row) => (
-                                    <Row key={row.name} row={row} />
-                                ))}
                             </TableBody>
-                            <TableFooter>
-                                <TableRow align="right">
-                                    <TableCell align="right" />
-                                    <TableCell align="right" />
-                                    <TableCell align="right" />
-                                    <TableCell align="right" />
-                                    <TableCell align="right" />
-                                    <TableCell align="right">
-                                        <TablePagination
-                                            rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                                            colSpan={3}
-                                            count={rows.length}
-                                            rowsPerPage={rowsPerPage}
-                                            page={page}
-                                            SelectProps={{
-                                                inputProps: {
-                                                    'aria-label': 'rows per page',
-                                                },
-                                                native: true,
-                                            }}
-                                            onPageChange={handleChangePage}
-                                            onRowsPerPageChange={handleChangeRowsPerPage}
-                                            ActionsComponent={TablePaginationActions}
-                                        />
-                                    </TableCell>
-                                </TableRow>
-                            </TableFooter>
                         </Table>
-
+                        <TablePagination
+                            style={{ display: 'flex', justifyContent: 'end' }}
+                            rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                            colSpan={3}
+                            count={allOrders.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            SelectProps={{
+                                inputProps: {
+                                    'aria-label': 'rows per page',
+                                },
+                                native: true,
+                            }}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                            ActionsComponent={TablePaginationActions}
+                        />
                     </TableContainer>
                 </Box>
             </Container>

@@ -24,12 +24,10 @@ const AddFood = () => {
             } catch (error) { 
                 return toast.error('Failed to upload the image!');
             }
-        }
-        console.log(data)
+        } 
 
         axios.post(`${FOOD_API}/new`, data)
-        .then((response) => {
-            console.log(response)
+        .then((response) => { 
             if(response.status === 200 || response.data.success) {
                 toast.success(`Successfully ${response.data.food.name} Added!`);
                 reset();

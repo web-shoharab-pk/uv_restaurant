@@ -18,7 +18,7 @@ import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase
 import React from 'react';
 import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
     return (
@@ -37,7 +37,8 @@ const theme = createTheme();
 
 const SignUp = ({ setNewUser }) => {
     const navigate = useNavigate()
-
+    const location = useLocation()
+    const path = location.state?.path || "/";
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
         const auth = getAuth();
@@ -51,8 +52,8 @@ const SignUp = ({ setNewUser }) => {
                 }).then((res) => {
                     // Profile updated!
                     // ... 
-                    toast.success(`${user.email} sign up successfully`)
-                    navigate('/dashboard/me')
+                    toast.success(`${user.email} sign up successfully`); 
+                    navigate(path)
                 }).catch((error) => {
                     // An error occurred
                     // ...
@@ -65,9 +66,7 @@ const SignUp = ({ setNewUser }) => {
                 const errorMessage = error.message;
                 // ..
                 toast.error(errorMessage)
-            });
-
-        console.log(data)
+            }); 
         reset()
     };
 

@@ -70,7 +70,7 @@ function Row({ order }) {
                                             {createdAt}
                                         </TableCell>
                                         <TableCell>{foodDetails.name}</TableCell>
-                                        <TableCell align="right">{orderedBy.id}</TableCell>
+                                        <TableCell align="right">{orderedBy.userId}</TableCell>
                                         <TableCell align="right">
                                             {foodDetails.price}
                                         </TableCell>
@@ -166,8 +166,7 @@ TablePaginationActions.propTypes = {
 };
 
 
-const AllOrdersTable = ({ allOrders }) => {
-    console.log("all Orders", allOrders)
+const AllOrdersTable = ({ allOrders }) => { 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 

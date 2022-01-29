@@ -33,12 +33,10 @@ const Profile = () => {
                         // Confirm the user is an Admin.
                         if (!!idTokenResult.claims.admin) {
                             // Show admin UI.
-                            setIsAdmin(!!idTokenResult.claims.admin)
-                            console.log("Show admin UI", idTokenResult)
+                            setIsAdmin(!!idTokenResult.claims.admin) 
                         } else {
                             // Show regular user UI.
-                            setIsAdmin(false)
-                            console.log("Show user UI")
+                            setIsAdmin(false) 
                         }
                     })
                     .catch((error) => {

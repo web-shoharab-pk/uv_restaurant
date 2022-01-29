@@ -12,8 +12,7 @@ const NavBar = () => {
     const navigate = useNavigate();
 
     const [userDetails, setUserDetails] = useState({});
-    const auth = getAuth();
-    console.log("userDetails", userDetails);
+    const auth = getAuth(); 
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -27,12 +26,10 @@ const NavBar = () => {
                         // Confirm the user is an Admin.
                         if (!!idTokenResult.claims.admin) {
                             // Show admin UI.
-                            setUserDetails({ uid, admin: idTokenResult.claims.admin })
-                            console.log("Show admin UI", idTokenResult)
+                            setUserDetails({ uid, admin: idTokenResult.claims.admin }) 
                         } else {
                             // Show regular user UI.
-                            setUserDetails({ uid, admin: false })
-                            console.log("Show user UI")
+                            setUserDetails({ uid, admin: false }) 
                         }
                     })
             } else {
@@ -65,8 +62,7 @@ const NavBar = () => {
         <div>
             <nav id={style.navbar} className="navbar navbar-expand-lg  navbar-light bg-light">
                 <div className="container-fluid navbar" id={style.nav_wrapper}>
-                    <Link to="/">
-                        {/* <img style={{width: 60, height: 60}} className="img-fluid" src={logo} alt="logo" /> */}
+                    <Link to="/"> 
                         <Avatar style={{ width: 90, height: 90 }} alt="Remy Sharp" src={logo} />
                     </Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,17 +93,16 @@ const NavBar = () => {
                             <li>
                                 <NavLink className={({ isActive }) =>
                                     isActive ? style.nav_item_link_active : style.nav_item_link
-                                } to="/blog">Blog</NavLink>
+                                } to="/blog" >Blog</NavLink>
                             </li>
                             {
-                                userDetails.admin ? '' 
-                                :    <li>
+                                !userDetails.admin && userDetails ?   <li>
                                 <NavLink className={({ isActive }) =>
                                     isActive ? style.nav_item_link_active : style.nav_item_link
                                 } to="/dashboard/cart">Cart</NavLink>
-                            </li>
+                            </li> : ''
                             }
-                         
+                             
 
                             {
                                 userDetails?.uid ?
@@ -135,10 +130,10 @@ const NavBar = () => {
                                                 open={Boolean(anchorElUser)}
                                                 onClose={handleCloseUserMenu}
                                             >
-                                                <MenuItem to="/dashboard/me" component={Link}>
+                                                <MenuItem to="/dashboard/me"  state={{path: "/dashboard/me"}} component={Link}>
                                                     <Typography textAlign="center">Account</Typography>
                                                 </MenuItem>
-                                                <MenuItem to="/dashboard/dashboard" component={Link}>
+                                                <MenuItem to="/dashboard/dashboard" state={{path: "/dashboard/dashboard"}} component={Link}>
                                                     <Typography textAlign="center">DashBoard</Typography>
                                                 </MenuItem>
                                                 <MenuItem onClick={() => handleSignOut()}>

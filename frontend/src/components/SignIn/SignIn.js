@@ -18,7 +18,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
     return (
@@ -38,7 +38,9 @@ const theme = createTheme();
 
 const SignIn = ({ setNewUser }) => {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation()
+    const path = location.state?.path || "/"; 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
         const auth = getAuth();
@@ -46,17 +48,13 @@ const SignIn = ({ setNewUser }) => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                console.log("User", user)
-                // ...
                 toast.success(`${user.email} login successfully`);
-                navigate('/dashboard/me')
+                navigate(path)
             })
             .catch((error) => {
                 const errorMessage = error.message;
                 toast.error(errorMessage)
-            });
-
-        console.log(data)
+            }); 
         reset()
     };
 

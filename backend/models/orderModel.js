@@ -10,7 +10,8 @@ const orderSchema = new mongoose.Schema({
         price: {
             type: String,
             required: true,
-        }
+        },
+        foodId: String
     },
     shipmentDetails: {
       type: Object,
@@ -23,7 +24,7 @@ const orderSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
-        id: {
+        userId: {
             type: String,
             required: true,
         }

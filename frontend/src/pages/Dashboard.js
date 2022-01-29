@@ -255,7 +255,7 @@ function DashboardContent() {
                     : panel === 'allorders' && isAdmin ? <AllOrders />
                       : panel === 'addAdmin' && isAdmin ? <AddAdmin />
                         : panel === 'addFood' && isAdmin ? <AddFood />
-                          : panel === 'allreviews' && isAdmin ? <AllReviews /> : null)
+                          : panel === 'allreviews' && isAdmin ? <AllReviews /> : '')
 
               }
               {/* USER Dashboard */}
@@ -266,7 +266,7 @@ function DashboardContent() {
                   : panel === 'dashboard' && !isAdmin ? <UserDashboard />
                     : panel === 'orders' && !isAdmin ? <MyOrders />
                       : panel === 'review' && !isAdmin ? <MyReview />
-                        : panel === 'cart' && !isAdmin ? <Cart /> : null
+                        : panel === 'cart' && !isAdmin ? <Cart /> : ''
                 )
               }
             </Container>
