@@ -1,41 +1,20 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-import { FOOD_API } from '../../../apis/apis';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { getFoods } from '../../../apis/fetcher';
 import TableLoader from '../../Skeleton/TableLoader';
 import AllFoodTable from './AllFoodTable';
 
 const AllFood = () => {
+    const { data: foods, isLoading, refetch } = useQuery("foods", getFoods)
+  
+ 
 
-    const [foods, setFoods] = useState([])
-    const handleFoodLoader = () => {
-        axios.get(`${FOOD_API}/all`)
-            .then((res) => {
-
-                if(res.status === 200 && res.data.success) {
-                    setFoods(res.data.foods)
-                }
-            })
-            .catch((err) => {
-                if(err) {
-                    setFoods([])
-                    toast.error("some thing is wrong!")
-                }
-            })
-    }
-
-    useEffect(() => {
-        handleFoodLoader()
-    }, [])
     return (
         <div>
             {
-                foods.length > 0 
-                ?
-                <AllFoodTable foods={foods} handleFoodLoader={handleFoodLoader} />
-                :
-                <TableLoader />
-            } 
+                isLoading ? <TableLoader />
+                : !!foods?.length ?  <AllFoodTable foods={foods} handleFoodLoader={refetch} /> : <h3>Foods data not found!</h3>
+            }
         </div>
     );
 };

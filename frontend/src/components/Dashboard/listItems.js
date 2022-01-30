@@ -2,7 +2,6 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import LogoutIcon from '@mui/icons-material/Logout';
 import PeopleIcon from '@mui/icons-material/People';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ListItem from '@mui/material/ListItem';
@@ -102,15 +101,6 @@ export const userSidebarItem = (
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
-    </ListItem>
-    <ListItem
-      style={({ isActive }) =>
-        isActive ? useStyles.listItemSelected : undefined
-      } button to="/dashboard/cart" state={{ path: "/dashboard/cart" }} component={NavLink}>
-      <ListItemIcon>
-        <LogoutIcon />
-      </ListItemIcon>
-      <ListItemText primary="Cart" />
     </ListItem>
     <ListItem
       style={({ isActive }) =>

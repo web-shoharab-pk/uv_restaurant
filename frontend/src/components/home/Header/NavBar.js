@@ -5,6 +5,7 @@ import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import CartDrawer from '../CartDrawer/CartDrawer';
 import logo from './../../../resources/image/food_logo.png';
 import style from './style.module.css';
 
@@ -12,7 +13,7 @@ const NavBar = () => {
     const navigate = useNavigate();
 
     const [userDetails, setUserDetails] = useState({});
-    const auth = getAuth(); 
+    const auth = getAuth();
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -26,10 +27,10 @@ const NavBar = () => {
                         // Confirm the user is an Admin.
                         if (!!idTokenResult.claims.admin) {
                             // Show admin UI.
-                            setUserDetails({ uid, admin: idTokenResult.claims.admin }) 
+                            setUserDetails({ uid, admin: idTokenResult.claims.admin })
                         } else {
                             // Show regular user UI.
-                            setUserDetails({ uid, admin: false }) 
+                            setUserDetails({ uid, admin: false })
                         }
                     })
             } else {
@@ -62,7 +63,7 @@ const NavBar = () => {
         <div>
             <nav id={style.navbar} className="navbar navbar-expand-lg  navbar-light bg-light">
                 <div className="container-fluid navbar" id={style.nav_wrapper}>
-                    <Link to="/"> 
+                    <Link to="/">
                         <Avatar style={{ width: 90, height: 90 }} alt="Remy Sharp" src={logo} />
                     </Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,6 +86,7 @@ const NavBar = () => {
                                         isActive ? style.nav_item_link_active : style.nav_item_link
                                     } to="/aboutUs">About Us</NavLink>
                             </li>
+
                             <li>
                                 <NavLink className={({ isActive }) =>
                                     isActive ? style.nav_item_link_active : style.nav_item_link
@@ -96,13 +98,12 @@ const NavBar = () => {
                                 } to="/blog" >Blog</NavLink>
                             </li>
                             {
-                                !userDetails.admin && userDetails ?   <li>
-                                <NavLink className={({ isActive }) =>
-                                    isActive ? style.nav_item_link_active : style.nav_item_link
-                                } to="/dashboard/cart">Cart</NavLink>
-                            </li> : ''
+                                userDetails?.uid ?
+                                    <li>
+                                        <CartDrawer />
+                                    </li> 
+                                    : ''
                             }
-                             
 
                             {
                                 userDetails?.uid ?
@@ -130,10 +131,10 @@ const NavBar = () => {
                                                 open={Boolean(anchorElUser)}
                                                 onClose={handleCloseUserMenu}
                                             >
-                                                <MenuItem to="/dashboard/me"  state={{path: "/dashboard/me"}} component={Link}>
+                                                <MenuItem to="/dashboard/me" state={{ path: "/dashboard/me" }} component={Link}>
                                                     <Typography textAlign="center">Account</Typography>
                                                 </MenuItem>
-                                                <MenuItem to="/dashboard/dashboard" state={{path: "/dashboard/dashboard"}} component={Link}>
+                                                <MenuItem to="/dashboard/dashboard" state={{ path: "/dashboard/dashboard" }} component={Link}>
                                                     <Typography textAlign="center">DashBoard</Typography>
                                                 </MenuItem>
                                                 <MenuItem onClick={() => handleSignOut()}>
@@ -156,6 +157,7 @@ const NavBar = () => {
                     </div>
                 </div>
             </nav>
+
         </div>
     );
 };
