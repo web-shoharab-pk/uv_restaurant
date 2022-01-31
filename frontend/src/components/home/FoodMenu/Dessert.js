@@ -70,7 +70,7 @@ const Dessert = () => {
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions style={{ display: 'flex', justifyContent: 'space-around' }}>
-                                        <Button variant="outlined" onClick={() => addToCart(food, currentUser)}>Add to cart</Button>
+                                        <Button variant="outlined" onClick={() => currentUser?.uid ? addToCart(food, currentUser) : navigate("/signin")}>Add to cart</Button>
                                             <Button onClick={() => handleOrder(food)} variant="contained">Order Now</Button>
                                         </CardActions>
                                     </Card>

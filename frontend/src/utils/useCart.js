@@ -19,26 +19,29 @@ export const useAddToCart = (data) => {
 }
 
 export const addToCart =(data, userData) => {
+ 
+    if(userData?.uid) {
+        const cartData = {
+            food: {
+                foodId: data._id,
+                name: data.name,
+                photo: data.photo,
+                price: data.price
+            },
+            userId: userData?.uid
+        }
+    
+        axios.post(`${CART_API}/addToCart`, cartData)
+            .then((res) => {
+                if(res.data.success && res.status === 200) {
+                    toast.success('Food add in cart!')
+                }
+            })
+            .catch((err) => {
+                err && toast.error(err.message)
+            })
+    } 
 
-    const cartData = {
-        food: {
-            foodId: data._id,
-            name: data.name,
-            photo: data.photo,
-            price: data.price
-        },
-        userId: userData?.uid
-    }
-
-    axios.post(`${CART_API}/addToCart`, cartData)
-        .then((res) => {
-            if(res.data.success && res.status === 200) {
-                toast.success('Food add in cart!')
-            }
-        })
-        .catch((err) => {
-            err && toast.error(err.message)
-        })
 };
 
 
