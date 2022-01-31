@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { ORDER_API } from '../../../apis/apis';
 import { OrderContext } from '../../../App';
 import { useAuth } from '../../../utils/useAuth';
+import { deleteCartData } from '../../../utils/useCart';
 
 
 export default function Review({ orderData }) {
@@ -48,6 +49,7 @@ export default function Review({ orderData }) {
           .then((res) => {
             if (res.data.success && res.status === 200) {
               toast.success(`${foodInfo.name} Your Order success!`);
+              deleteCartData(currentUser?.uid)
               navigate('/dashboard/dashboard')
             }
           })

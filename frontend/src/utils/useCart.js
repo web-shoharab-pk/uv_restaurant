@@ -39,4 +39,16 @@ export const addToCart =(data, userData) => {
         .catch((err) => {
             err && toast.error(err.message)
         })
+};
+
+
+export const deleteCartData = (id) => {
+    axios.delete(`${CART_API}/user/${id}`)
+    .then((res) => {
+        if(res.data.success && res.status === 200) {
+        }
+    })
+    .catch((err) => {
+        err && toast.error(err.message)
+    })
 }

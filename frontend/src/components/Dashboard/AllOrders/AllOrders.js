@@ -9,7 +9,7 @@ const AllOrders = () => {
 
     const [allOrders, setAllOrders] = useState([]);
 
-    useEffect(() => {
+    const handleOrderLoader = () => {
         axios.get(`${ORDER_API}/all`)
             .then((response) => {
                 if (response.data.success) {
@@ -22,13 +22,17 @@ const AllOrders = () => {
                     toast.error('Some thing is wrong!')
                 }
             })
+    }
+
+    useEffect(() => {
+        handleOrderLoader()
     }, [])
 
     return (
         <div>
             {
                 allOrders.length > 0 ?
-                    <AllOrdersTable allOrders={allOrders} />
+                    <AllOrdersTable allOrders={allOrders} handleOrderLoader={handleOrderLoader} />
                     :
                     <TableLoader />
             }

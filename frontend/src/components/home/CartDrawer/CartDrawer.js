@@ -53,7 +53,7 @@ export default function CartDrawer() {
 
     React.useEffect(() => {
         handleCartDataLoader()
-    }, [handleCartDataLoader]);
+    }, [handleCartDataLoader, currentUser?.uid]);
 
     const handleDeleteFood = (id) => {
 
@@ -110,9 +110,14 @@ export default function CartDrawer() {
                     </>
                 ))
             }
-            <Button onClick={() => handleCheckOut(cart[0].food)} style={{ position: "absolute", bottom: '-100%', right: '50px' }} variant="contained">
+            {
+                cart?.length > 0 ?
+                <Button onClick={() => handleCheckOut(cart[0].food)} style={{ position: "absolute", to: '20px', right: '50px' }} variant="contained">
                 CheckOut Now
                 </Button>
+                : <h4>No Cart Data</h4>
+            }
+          
         </Box>
     );
 

@@ -65,6 +65,28 @@ router.delete('/delete/:id', async (req, res) => {
             message: "Successfully Order Deleted!"
         });
     }
+});
+
+// UPDATE ORDER Status
+router.put('/:id', async (req, res) => {
+
+    let order = await Order.findById(req.params.id);
+    if(!order) {
+        res.status(500).json({success: false})
+    } else {
+        order = await Order.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false
+        })
+    
+        res.status(200).json({
+            success: true,
+            message: "Successfully Order Updated!",
+            order
+        })
+    }
+
 })
 
 

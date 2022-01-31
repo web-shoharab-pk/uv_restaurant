@@ -19,9 +19,10 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import React from 'react';
- 
+import { updateOrder } from '../../../utils/useOrderUpdate';
 
-function Row({ order }) {
+
+function Row({ order, handleOrderLoader }) {
     const { foodDetails, orderedBy, createdAt } = order;
     const [open, setOpen] = React.useState(false);
 
@@ -44,8 +45,21 @@ function Row({ order }) {
                 <TableCell align="center">{foodDetails.price}</TableCell>
                 <TableCell align="center">VISA CARD</TableCell>
                 <TableCell align="center">
-                    <Button variant="outlined">
-                        btn</Button>
+                    {
+                        order?.status === 'Approve' || order?.status === 'Reject' ?
+                            <Button variant="outlined" color={order?.status === 'Approve' ? 'secondary' : 'info' }>
+                               {order?.status}
+                            </Button>
+                            :
+                            <Box sx={{display: 'flex', justifyContent: 'space-around' }}>
+                                <Button onClick={() => updateOrder(order._id, handleOrderLoader, "Reject")} variant="outlined" color="error">
+                                    Reject
+                                </Button>
+                                <Button onClick={() => updateOrder(order._id, handleOrderLoader, 'Approve')} variant="contained" color="success">
+                                    Approve
+                                </Button>
+                            </Box>
+                    }
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -102,7 +116,7 @@ Row.propTypes = {
         protein: PropTypes.number.isRequired,
     }).isRequired,
 };
- 
+
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -166,7 +180,7 @@ TablePaginationActions.propTypes = {
 };
 
 
-const AllOrdersTable = ({ allOrders }) => { 
+const AllOrdersTable = ({ allOrders, handleOrderLoader }) => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -188,11 +202,11 @@ const AllOrdersTable = ({ allOrders }) => {
 
             <Container>
                 <Box>
-                  
+
                     <TableContainer component={Paper}>
-                    <h3 style={{textAlign: 'center', marginTop: '8px'}}>All Orders</h3>
+                        <h3 style={{ textAlign: 'center', marginTop: '8px' }}>All Orders</h3>
                         <Table aria-label="collapsible table">
-                        
+
                             <TableHead>
                                 <TableRow>
                                     <TableCell />
@@ -209,7 +223,7 @@ const AllOrdersTable = ({ allOrders }) => {
                                     ? allOrders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     : allOrders
                                 ).map((order) => (
-                                    <Row key={order._id} order={order} />
+                                    <Row key={order._id} handleOrderLoader={handleOrderLoader} order={order} />
                                 ))}
                                 {emptyRows > 0 && (
                                     <TableRow style={{ height: 53 * emptyRows }}>

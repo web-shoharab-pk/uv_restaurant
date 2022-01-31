@@ -36,16 +36,18 @@ router.get('/:userId', async (req, res) => {
     const cart = await Cart.find(req.params)
 
     if(cart.length === 0) {
-        res.status(500).json({
+        res.status(200).json({
             success: false,
             message: 'Cart Data Not Found!'
         })
+    } else {
+        res.status(200).json({
+            success: true,
+            cart
+        })
     }
 
-    res.status(200).json({
-        success: true,
-        cart
-    })
+
 })
 
 router.delete('/:id', async (req, res) => {
@@ -62,6 +64,26 @@ router.delete('/:id', async (req, res) => {
         success: true,
         message: "Food Deleted Successfully!"
     })
+});
+
+// DELETE USER CART
+router.delete('/user/:userId', async (req, res) => {
+ 
+    const food = await Cart.deleteMany(req.params)
+    if(!food) {
+        res.status(500).json({
+            success: false,
+            message: "Cart not found!"
+        })
+    } else {
+        res.status(200).json({
+            success: true,
+            message: "Cart Deleted Successfully!",
+            ...food
+        })
+    }
+ 
+
 })
 
 module.exports = router;

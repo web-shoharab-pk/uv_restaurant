@@ -5,16 +5,18 @@ import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from '../../../utils/useAuth';
 import CartDrawer from '../CartDrawer/CartDrawer';
 import logo from './../../../resources/image/food_logo.png';
 import style from './style.module.css';
 
 const NavBar = () => {
+    const { currentUser} = useAuth();
     const navigate = useNavigate();
     const [userDetails, setUserDetails] = useState({});
     const auth = getAuth();
 
-
+    console.log("currentTarget", currentUser)
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -99,7 +101,7 @@ const NavBar = () => {
                                 } to="/blog" >Blog</NavLink>
                             </li>
                             {
-                                userDetails?.uid ?
+                                userDetails?.uid && !userDetails.admin ?
                                     <li>
                                         <CartDrawer />
                                     </li>

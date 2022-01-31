@@ -19,5 +19,18 @@
     "mongodb": "^4.3.0",
     "mongoose": "^6.1.7",
     "nodemon": "^2.0.15"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "server"
+    ],
+    "ext": "ts",
+    "ignore": [
+      "*.test.ts"
+    ],
+    "delay": "3",
+    "execMap": {
+      "ts": "ts-node"
+    }
   }
 }

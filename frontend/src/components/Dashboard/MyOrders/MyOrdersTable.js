@@ -19,7 +19,7 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import React from 'react';
- 
+
 
 function Row({ order }) {
     const { foodDetails, orderedBy, createdAt } = order;
@@ -44,8 +44,9 @@ function Row({ order }) {
                 <TableCell align="center">{foodDetails.price}</TableCell>
                 <TableCell align="center">VISA CARD</TableCell>
                 <TableCell align="center">
-                    <Button variant="outlined">
-                        btn</Button>
+                    <Button variant="outlined" color={order?.status === 'Approve' ? 'success' : 'error'}>
+                        {order?.status}
+                    </Button>
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -102,7 +103,7 @@ Row.propTypes = {
         protein: PropTypes.number.isRequired,
     }).isRequired,
 };
- 
+
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -166,7 +167,7 @@ TablePaginationActions.propTypes = {
 };
 
 
-const MyOrdersTable = ({ allOrders }) => { 
+const MyOrdersTable = ({ allOrders }) => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -188,11 +189,11 @@ const MyOrdersTable = ({ allOrders }) => {
 
             <Container>
                 <Box>
-                  
+
                     <TableContainer component={Paper}>
-                    <h3 style={{textAlign: 'center', marginTop: '8px'}}>All Orders</h3>
+                        <h3 style={{ textAlign: 'center', marginTop: '8px' }}>All Orders</h3>
                         <Table aria-label="collapsible table">
-                        
+
                             <TableHead>
                                 <TableRow>
                                     <TableCell />
@@ -200,7 +201,7 @@ const MyOrdersTable = ({ allOrders }) => {
                                     <TableCell align="center">Food Name</TableCell>
                                     <TableCell align="center">Price</TableCell>
                                     <TableCell align="center">Payment BY</TableCell>
-                                    <TableCell align="center">Action</TableCell>
+                                    <TableCell align="center">Status</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
