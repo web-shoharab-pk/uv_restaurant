@@ -11,9 +11,10 @@ import style from './style.module.css';
 
 const NavBar = () => {
     const navigate = useNavigate();
-
     const [userDetails, setUserDetails] = useState({});
     const auth = getAuth();
+
+
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -101,7 +102,7 @@ const NavBar = () => {
                                 userDetails?.uid ?
                                     <li>
                                         <CartDrawer />
-                                    </li> 
+                                    </li>
                                     : ''
                             }
 

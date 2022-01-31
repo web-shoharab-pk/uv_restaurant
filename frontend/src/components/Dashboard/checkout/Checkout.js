@@ -47,10 +47,10 @@ export default function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-
+console.log("foodInfo", foodInfo)
   React.useEffect(() => {
-   return foodInfo._id ? '' : navigate('/')
-  }, [foodInfo._id, navigate])
+   return foodInfo?.name  ? '' : navigate('/')
+  }, [foodInfo, navigate])
 
   function getStepContent(step) {
     switch (step) {

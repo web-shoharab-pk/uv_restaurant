@@ -6,15 +6,20 @@ import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import { FOOD_API } from '../../../apis/apis';
 import { OrderContext } from '../../../App';
+import { addToCart } from '../../../utils/useCart';
 import CardLoader from '../../Skeleton/CardLoader';
+import { useAuth } from './../../../utils/useAuth';
 
 const BreakFast = () => {
 
-    const [foods, setFoods] = useState([]) 
+
+    const { setFoodInfo } = useContext(OrderContext);
+    const { currentUser, isUserLoading } = useAuth();
+    const [foods, setFoods] = useState([])
     useEffect(() => {
         axios.post(`${FOOD_API}/category`, { category: "breakfast" })
             .then((res) => {
@@ -26,13 +31,15 @@ const BreakFast = () => {
                 setFoods([])
             })
     }, []);
-
-    const { setFoodInfo } = useContext(OrderContext);
     const navigate = useNavigate()
-    const handleOrder = (data) => { 
+    const handleOrder = (data) => {
+        if (!isUserLoading && !currentUser) {
+            return navigate("/signin")
+        }
         setFoodInfo(data);
         navigate('/checkout')
     }
+
 
     return (
         <div>
@@ -65,7 +72,7 @@ const BreakFast = () => {
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions style={{ display: 'flex', justifyContent: 'space-around' }}>
-                                            <Button variant="outlined">Add to cart</Button>
+                                            <Button variant="outlined" onClick={() => addToCart(food, currentUser)}>Add to cart</Button>
                                             <Button onClick={() => handleOrder(food)} variant="contained">Order Now</Button>
                                         </CardActions>
                                     </Card>

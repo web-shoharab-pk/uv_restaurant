@@ -17,7 +17,7 @@ const NotMatchPage = lazy(() => import("./pages/NotMatchPage"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Home = lazy(() => import("./pages/Home"));
 
-export const OrderContext = createContext({});
+export const OrderContext = createContext();
 const queryClient = new QueryClient({ queryCache: new QueryCache({ onError: (err) => toast.error(err.message) }) });
 
 function App() {

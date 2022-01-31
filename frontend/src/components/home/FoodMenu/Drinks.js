@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { FOOD_API } from '../../../apis/apis';
 import { OrderContext } from '../../../App';
 import { useAuth } from '../../../utils/useAuth';
+import { addToCart } from '../../../utils/useCart';
 import CardLoader from '../../Skeleton/CardLoader';
 
 const Drinks = () => {
@@ -73,7 +74,7 @@ const Drinks = () => {
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions style={{ display: 'flex', justifyContent: 'space-around' }}>
-                                            <Button variant="outlined">Add to cart</Button>
+                                        <Button variant="outlined" onClick={() => addToCart(food, currentUser)}>Add to cart</Button>
                                             <Button onClick={() => handleOrder(food)} variant="contained">Order Now</Button>
                                         </CardActions>
                                     </Card>

@@ -10,12 +10,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FOOD_API } from '../../../apis/apis';
 import { OrderContext } from '../../../App';
+import { useAuth } from '../../../utils/useAuth';
+import { addToCart } from '../../../utils/useCart';
 import CardLoader from '../../Skeleton/CardLoader';
 
 
 const Special = () => {
     const [foods, setFoods] = useState([]);
-
+    const { currentUser, isUserLoading } = useAuth();
     useEffect(() => {
         axios.post(`${FOOD_API}/category`, { category: "today special" })
             .then((res) => {
@@ -29,7 +31,10 @@ const Special = () => {
     }, []);
     const { setFoodInfo } = useContext(OrderContext);
     const navigate = useNavigate()
-    const handleOrder = (data) => { 
+    const handleOrder = (data) => {
+        if (!isUserLoading && !currentUser) {
+            return navigate("/signin")
+        }
         setFoodInfo(data);
         navigate('/checkout')
     }
@@ -65,7 +70,7 @@ const Special = () => {
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions style={{ display: 'flex', justifyContent: 'space-around' }}>
-                                            <Button variant="outlined">Add to cart</Button>
+                                            <Button variant="outlined" onClick={() => addToCart(food, currentUser)}>Add to cart</Button>
                                             <Button onClick={() => handleOrder(food)} variant="contained">Order Now</Button>
                                         </CardActions>
                                     </Card>

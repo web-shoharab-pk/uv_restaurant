@@ -115,12 +115,12 @@ export default function AllFoodTable({ foods, handleFoodLoader }) {
                 axios.delete(`${FOOD_API}/delete/${id}`)
                     .then((res) => {
                         if (res.data.success) {
+                            handleFoodLoader()
                             Swal.fire(
                                 'Deleted!',
                                 'Review has been deleted.',
                                 'success'
-                            )
-                            handleFoodLoader()
+                            )     
                         }
                     })
                     .catch((err) => {

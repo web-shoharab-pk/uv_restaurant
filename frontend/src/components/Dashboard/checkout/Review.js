@@ -16,7 +16,7 @@ import { useAuth } from '../../../utils/useAuth';
 
 export default function Review({ orderData }) {
   const { currentUser } = useAuth();
-  const { foodInfo } = React.useContext(OrderContext);
+  const { foodInfo } = React.useContext(OrderContext); 
   const navigate = useNavigate()
   const orderedBy = {
     name: currentUser?.displayName,
@@ -70,18 +70,23 @@ export default function Review({ orderData }) {
       <Typography variant="h6" gutterBottom>
         Order summary
       </Typography>
-      <List disablePadding>
-        <ListItem key={foodInfo?.name} sx={{ py: 1, px: 0 }}>
-          <ListItemText primary={foodInfo?.name} secondary={foodInfo?.description.slice(0, 25)} />
-          <Typography variant="body2">{foodInfo?.price}</Typography>
-        </ListItem>
-        <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary="Total" />
-          <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {foodInfo?.price}
-          </Typography>
-        </ListItem>
-      </List>
+      {/* {
+        foodInfo?.map((food) => ( */}
+          <List disablePadding>
+            <ListItem key={foodInfo?.name} sx={{ py: 1, px: 0 }}>
+              <ListItemText primary={foodInfo?.name} secondary={foodInfo?.description?.slice(0, 25)} />
+              <Typography variant="body2">{foodInfo.price}</Typography>
+            </ListItem>
+            <ListItem sx={{ py: 1, px: 0 }}>
+              <ListItemText primary="Total" />
+              <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+                {foodInfo?.price}
+              </Typography>
+            </ListItem>
+          </List>
+        {/* ))
+      } */}
+
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>

@@ -11,8 +11,11 @@ import { FOOD_API } from '../../../apis/apis';
 import axios from 'axios';
 import { OrderContext } from '../../../App';
 import { useNavigate } from 'react-router-dom';
+import { addToCart } from '../../../utils/useCart';
+import { useAuth } from '../../../utils/useAuth';
 
 const Dinner = () => {
+    const { currentUser, isUserLoading  } = useAuth();
     const [foods, setFoods] = useState([]) 
     useEffect(() => {
         axios.post(`${FOOD_API}/category`, { category: "dinner" })
@@ -29,7 +32,10 @@ const Dinner = () => {
     
     const { setFoodInfo } = useContext(OrderContext);
     const navigate = useNavigate()
-    const handleOrder = (data) => { 
+    const handleOrder = (data) => {
+        if (!isUserLoading && !currentUser) {
+            return navigate("/signin")
+        }
         setFoodInfo(data);
         navigate('/checkout')
     }
@@ -65,7 +71,7 @@ const Dinner = () => {
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions style={{ display: 'flex', justifyContent: 'space-around' }}>
-                                            <Button variant="outlined">Add to cart</Button>
+                                        <Button variant="outlined" onClick={() => addToCart(food, currentUser)}>Add to cart</Button>
                                             <Button onClick={() => handleOrder(food)} variant="contained">Order Now</Button>
                                         </CardActions>
                                     </Card>
