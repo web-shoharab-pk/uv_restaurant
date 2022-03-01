@@ -1,16 +1,33 @@
+import Rating from '@mui/material/Rating';
 import { Box } from '@mui/system';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import image1 from './../../../resources/image/1.png';
-import image2 from './../../../resources/image/2.png';
+import { REVIEW_API } from '../../../apis/apis';
 import './style.css';
 
 const Testimonials = () => {
+
+    const [reviews, setReviews] = useState([])
+
+
+    useEffect(() => {
+        axios.get(`${REVIEW_API}/all`)
+            .then((res) => {
+                if (res.data.success) {
+                    setReviews(res.data.reviews)
+                }
+            })
+            .catch((err) => {
+                setReviews([])
+            })
+    }, []);
+
     return (
         <div className="testimonials">
             <div className="testimonial_div">
-                <Box sx={{ width: 500, p: 2 }}>
+                <Box sx={{ width: '100%', p: 2 }}>
                     <div className="review-title text-center">
                         <br />
                         <span>What Our Clients Says</span>
@@ -23,37 +40,26 @@ const Testimonials = () => {
                         autoPlay={true}
                         interval={3000}
                     >
-                        <div className="review_card shadow border-1 card">
-                            <img className="review_img" src={image1} alt="" />
-                            <div className="myCarousel">
-                                <p>
-                                    It's freeing to be able to catch up on customized news and not be
-                                    distracted by a social media element on the same site
-                                </p>
-                                <h3>Shirley Fultz</h3>
-                            </div>
-                        </div>
+                        {
+                            reviews?.length > 0 ?
+                                reviews?.map((review) => (
+                                    <div key={review._id} className="review_card shadow border-1 card">
+                                        <img className="review_img" src={review.image} alt="" />
+                                        <div className="myCarousel">
+                                            <p>
+                                                {review.text}
+                                            </p>
+                                            <h3>{review?.reviewedBy?.name}</h3>
+                                            <Rating name="read-only"
+                                                value={review?.rate}
+                                                readOnly />
+                                        </div>
+                                    </div>
+                                )
 
-                        <div className="review_card shadow border-1 card">
-                            <img className="review_img" src={image2} alt="" />
-                            <div className="myCarousel">
-                                <p>
-                                    The simple and intuitive design makes it easy for me use. I highly
-                                    recommend Fetch to my peers.
-                                </p>
-                                <h3>Daniel Keystone</h3>
-                            </div>
-                        </div>
-                        <div className="review_card shadow border-1 card">
-                            <img className="review_img" src={image2} alt="" />
-                            <div className="myCarousel">
-                                <p>
-                                    The simple and intuitive design makes it easy for me use. I highly
-                                    recommend Fetch to my peers.
-                                </p>
-                                <h3>Daniel Keystone</h3>
-                            </div>
-                        </div>
+                                )
+                                : ''
+                        }
                     </Carousel>
                 </Box>
             </div>

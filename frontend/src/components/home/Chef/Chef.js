@@ -16,19 +16,19 @@ const chefData = [
         alt: 'Rupon Image'
     },
     {
-        name: "Chef Name",
+        name: "Deep",
         label: "Mater Chef",
         img: deep,
         alt: 'Rupon Image'
     },
     {
-        name: "Chef Name",
+        name: "Raju",
         label: "Mater Chef",
         img: reju,
         alt: 'Rupon Image'
     },
     {
-        name: "Chef Name",
+        name: "Ripa",
         label: "Mater Chef",
         img: ripa,
         alt: 'Rupon Image'
@@ -53,14 +53,13 @@ const Chef = () => {
                             >
                                 {
                                     chefData.map((data) => (
-                                        <div className={styles.chef_card}>
+                                        <div key={data.name} className={styles.chef_card}>
                                             <div className="text-center shadow ">
                                                 <CardMedia
                                                     component="img"
                                                     className={styles.chef_card_image}
                                                     src={data.img}
                                                     alt="Deep"
-                                                    // width={200}
                                                     height={200}
                                                 />
                                                 <h5 className={styles.chef_name}>{data.name}</h5>

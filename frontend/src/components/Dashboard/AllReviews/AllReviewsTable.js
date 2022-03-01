@@ -158,13 +158,13 @@ const AllReviewsTable = ({ reviews, handleLoadReview }) => {
                                 {review._id.slice(0, 10)}
                             </TableCell>
                             <TableCell style={{ width: 160 }} align="center">
-                                {review.reviewedBy.id.slice(0, 10)}
+                                {review.reviewedBy.id}
                             </TableCell>
                             <TableCell style={{ width: 160 }} align="center">
                                 {review.reviewedBy.name}
                             </TableCell>
                             <TableCell style={{ width: 160 }} align="right">
-                                {review.text}
+                                {review.text.slice(0, 50)}
                             </TableCell>
                             <TableCell style={{ width: 160 }} align="right">
                                 {review.rate}

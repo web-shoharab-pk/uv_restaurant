@@ -22,13 +22,15 @@ const reviewRoutes = require("./routes/reviewRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const superAdmin = require("./routes/superAdminRoute");
 const cartRoutes = require("./routes/cartRoutes");
+const reservationRoutes = require("./routes/reservationRoutes")
 
 // routes
 app.use('/api/food', foodRoutes);
 app.use('/api/review', reviewRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/superAdmin', superAdmin);
-app.use('/api/cart', cartRoutes)
+app.use('/api/cart', cartRoutes);
+app.use('/api/reserv', reservationRoutes);
 
 // Connect with database
 connectDatabase();

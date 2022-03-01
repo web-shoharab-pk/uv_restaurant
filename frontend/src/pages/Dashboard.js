@@ -25,7 +25,7 @@ import DashboardDetails from '../components/Dashboard/DashboardDetails';
 import MyOrders from '../components/Dashboard/MyOrders/MyOrders';
 import MyReview from '../components/Dashboard/MyReview/MyReview';
 import Profile from '../components/Dashboard/Profile/Profile';
-import UserDashboard from '../components/Dashboard/UserDashboard'; 
+import UserDashboard from '../components/Dashboard/UserDashboard';
 import { adminSidebarItem, userSidebarItem } from './../components/Dashboard/listItems';
 import styles from './styles.module.css';
 
@@ -63,8 +63,9 @@ const AppBar = styled(MuiAppBar, {
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     '& .MuiDrawer-paper': {
-      position: 'relative',
+      position: open ? 'fixed' : "relative",
       whiteSpace: 'nowrap',
+      zIndex: 2,
       width: drawerWidth,
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
@@ -108,7 +109,7 @@ function DashboardContent() {
     const auth = getAuth();
     signOut(auth).then(() => {
       // Sign-out successful.
-      navigate('/') 
+      navigate('/')
       window.location.reload();
     }).catch((error) => {
       // An error happened.
@@ -137,7 +138,7 @@ function DashboardContent() {
       // User is signed out 
       toast.dismiss("signout");
     }
-  }); 
+  });
 
   return (
     <div className={styles.dashboard_page}>
@@ -202,7 +203,7 @@ function DashboardContent() {
                   <MenuItem to="/dashboard/dashboard" component={Link}>
                     <Typography textAlign="center">DashBoard</Typography>
                   </MenuItem>
-                  <MenuItem onClick={() => handleSignOut()}>
+                  <MenuItem onClick={handleSignOut}>
                     <Typography textAlign="center">Logout</Typography>
                   </MenuItem>
                 </Menu>
@@ -229,7 +230,7 @@ function DashboardContent() {
                 :
                 <List>{userSidebarItem}</List>
             }
-          
+
             <Divider />
 
           </Drawer>

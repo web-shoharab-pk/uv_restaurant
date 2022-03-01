@@ -37,11 +37,13 @@ function App() {
                 <Route path="/dashboard/:panel" element={<Dashboard />} />
               </Route>
               <Route element={<ProtectedRoutes />}>
+              <Route path="/reservation" element={<Reservation />} />
+              </Route>
+              <Route element={<ProtectedRoutes />}>
                 <Route path="/checkout" element={<Checkout />} />
               </Route>
               <Route path="/signin" element={<Sign />} />
-              <Route path="/aboutUs" element={<AboutUs />} />
-              <Route path="/reservation" element={<Reservation />} />
+              <Route path="/aboutUs" element={<AboutUs />} />    
               <Route path="/blog" element={<Blog />} />
               <Route path="*" element={<NotMatchPage />} />
             </Routes>

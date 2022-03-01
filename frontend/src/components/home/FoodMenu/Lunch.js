@@ -13,6 +13,7 @@ import { OrderContext } from '../../../App';
 import { useNavigate } from 'react-router-dom';
 import { addToCart } from '../../../utils/useCart';
 import { useAuth } from '../../../utils/useAuth';
+import style from './styles.css'
 
 const Lunch = () => {
     const { currentUser, isUserLoading } = useAuth()
@@ -45,8 +46,8 @@ const Lunch = () => {
                 {
                         foods.length > 0 ?
                             foods.map(food => (
-                                <Grid key={food._id} item xs={4} md={6} sm={12}>
-                                    <Card>
+                                <Grid key={food._id} item xs={12} lg={4} md={6} sm={12}>
+                                    <Card style={{backgroundColor: '#FC521D', color: 'white'}}>
                                         <CardActionArea>
                                             <CardMedia
                                                 component="img"
@@ -55,22 +56,27 @@ const Lunch = () => {
                                                 alt="green iguana"
                                             />
                                             <CardContent>
-                                                <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
-                                                    <Typography gutterBottom variant="h4" component="div">
+                                                <Box>
+                                                    <Typography gutterBottom variant="h5" component="div">
                                                         {food?.name}
                                                     </Typography>
                                                     <Typography gutterBottom variant="h5" component="div">
                                                         ${food?.price}
                                                     </Typography>
                                                 </Box>
-                                                <Typography variant="body2" color="text.secondary">
-                                                    {food?.description.slice(0, 100)}
+                                                <Typography variant="body2" style={{color: 'white'}}>
+                                                    {food?.description.slice(0, 50)}
                                                 </Typography>
                                             </CardContent>
                                         </CardActionArea>
-                                        <CardActions style={{ display: 'flex', justifyContent: 'space-around' }}>
-                                        <Button variant="outlined" onClick={() => currentUser?.uid ? addToCart(food, currentUser) : navigate("/signin")}>Add to cart</Button>
-                                            <Button onClick={() => handleOrder(food)} variant="contained">Order Now</Button>
+                                        <CardActions style={{display: 'flex', justifyContent: 'space-between' }}>
+                                           
+                                            <Button className={style.menuBtn} variant="contained" onClick={() => currentUser?.uid ? addToCart(food, currentUser) : navigate("/signin")}>Add to cart</Button>
+                                           
+                                                <Button className={style.menuBtn} onClick={() => handleOrder(food)} variant="contained">Order Now</Button>
+                                           
+                                       
+                                           
                                         </CardActions>
                                     </Card>
                                 </Grid>

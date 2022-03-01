@@ -1,54 +1,19 @@
-import axios from "axios";
-import React, { useEffect, useState } from 'react';
-import { ORDER_API } from '../../../apis/apis';
+import React from 'react';
+import { useQuery } from "react-query";
+import { getMyOrder } from "../../../apis/fetcher";
 import { useAuth } from "../../../utils/useAuth";
 import TableLoader from "../../Skeleton/TableLoader";
 import MyOrdersTable from './MyOrdersTable';
 
 const MyOrders = () => {
-
-    const [allOrders, setAllOrders] = useState([]);
-    const { currentUser } = useAuth();
-
-    useEffect(() => {
-
-    }, [])
-    // const data = {
-    //     orderedBy: {
-    //         name: currentUser?.displayName,
-    //         userId: currentUser?.uid
-    //     }
-    // }
-    useEffect(() => {
-
-        axios.post(`${ORDER_API}/user`, {
-            orderedBy: {
-                name: currentUser?.displayName,
-                userId: currentUser?.uid
-            }
-        })
-            .then((response) => {
-                if (response.data.success) {
-                    setAllOrders(response.data.order);
-                }
-            })
-            .catch((err) => {
-                if (err) {
-                    setAllOrders([])
-                    // toast.error(err.message)
-                }
-            })
-    }, [currentUser?.displayName, currentUser?.uid])
+    const { currentUser, isUserLoading } = useAuth();
+    const { isLoading, data } = useQuery("allOrders", () => getMyOrder(currentUser), { enabled: !isUserLoading })
 
     return (
         <div>
             {
-                allOrders.length > 0 ?
-                    <MyOrdersTable allOrders={allOrders} />
-                    :
-                    <TableLoader />
+                isLoading ? <TableLoader /> : data?.length ? <MyOrdersTable allOrders={data} />: <h2>Order Not found!</h2>
             }
-
         </div>
     );
 };

@@ -5,18 +5,17 @@ import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from '../../../utils/useAuth';
+// import { useAuth } from '../../../utils/useAuth';
 import CartDrawer from '../CartDrawer/CartDrawer';
 import logo from './../../../resources/image/food_logo.png';
 import style from './style.module.css';
 
 const NavBar = () => {
-    const { currentUser} = useAuth();
+    // const { currentUser} = useAuth();
     const navigate = useNavigate();
     const [userDetails, setUserDetails] = useState({});
     const auth = getAuth();
-
-    console.log("currentTarget", currentUser)
+ const [toggle, setToggle] = React.useState(false)
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -62,6 +61,11 @@ const NavBar = () => {
             // An error happened.
         });
     }
+
+    const handleToggle = () => {
+        setToggle(value => !value) 
+    }
+
     return (
         <div>
             <nav id={style.navbar} className="navbar navbar-expand-lg  navbar-light bg-light">
@@ -70,11 +74,11 @@ const NavBar = () => {
                         <Avatar style={{ width: 90, height: 90 }} alt="Remy Sharp" src={logo} />
                     </Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"> </span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul id={style.nav_item_ul} className="navbar-nav  mx-auto mb-lg-0 bg-light">
-                            <li>
+                        <span onClick={() => handleToggle()} className="navbar-toggler-icon"> </span>
+                    </button> 
+                    <div className={` ${toggle ? 'collapse navbar-collapse show' : 'collapse navbar-collapse'}`}  >
+                        <ul id={style.nav_item_ul} className="navbar-nav  ms-auto mb-lg-0 bg-light">
+                            <li class="nav-item">
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive ? style.nav_item_link_active : style.nav_item_link
@@ -83,19 +87,19 @@ const NavBar = () => {
                                     Home
                                 </NavLink>
                             </li>
-                            <li>
+                            <li class="nav-item">
                                 <NavLink
                                     className={({ isActive }) =>
                                         isActive ? style.nav_item_link_active : style.nav_item_link
                                     } to="/aboutUs">About Us</NavLink>
                             </li>
 
-                            <li>
+                            <li class="nav-item">
                                 <NavLink className={({ isActive }) =>
                                     isActive ? style.nav_item_link_active : style.nav_item_link
                                 } to="/reservation">Reservation</NavLink>
                             </li>
-                            <li>
+                            <li class="nav-item">
                                 <NavLink className={({ isActive }) =>
                                     isActive ? style.nav_item_link_active : style.nav_item_link
                                 } to="/blog" >Blog</NavLink>

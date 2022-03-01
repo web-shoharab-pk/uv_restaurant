@@ -48,8 +48,8 @@ const BreakFast = () => {
                     {
                         foods.length > 0 ?
                             foods.map(food => (
-                                <Grid key={food._id} item xs={4} md={6} sm={12}>
-                                    <Card>
+                                <Grid key={food._id} item xs={12} md={6} sm={12}>
+                                    <Card style={{backgroundColor: '#FC521D', color: 'white'}}>
                                         <CardActionArea>
                                             <CardMedia
                                                 component="img"
@@ -58,21 +58,21 @@ const BreakFast = () => {
                                                 alt="green iguana"
                                             />
                                             <CardContent>
-                                                <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
-                                                    <Typography gutterBottom variant="h4" component="div">
+                                                <Box>
+                                                    <Typography gutterBottom variant="h5" component="div">
                                                         {food?.name}
                                                     </Typography>
                                                     <Typography gutterBottom variant="h5" component="div">
                                                         ${food?.price}
                                                     </Typography>
                                                 </Box>
-                                                <Typography variant="body2" color="text.secondary">
-                                                    {food?.description.slice(0, 100)}
+                                                <Typography variant="body2" style={{color: 'white'}}>
+                                                    {food?.description.slice(0, 50)}
                                                 </Typography>
                                             </CardContent>
                                         </CardActionArea>
                                         <CardActions style={{ display: 'flex', justifyContent: 'space-around' }}>
-                                            <Button variant="outlined" onClick={() => currentUser?.uid ? addToCart(food, currentUser) : navigate("/signin")}>Add to cart</Button>
+                                            <Button variant="contained" onClick={() => currentUser?.uid ? addToCart(food, currentUser) : navigate("/signin")}>Add to cart</Button>
                                             <Button onClick={() => handleOrder(food)} variant="contained">Order Now</Button>
                                         </CardActions>
                                     </Card>

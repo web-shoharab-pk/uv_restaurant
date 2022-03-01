@@ -24,7 +24,7 @@ export default function CartDrawer() {
         bottom: false,
         right: false,
     });
-    console.log("cart", cart)
+   
     const handleCartDataLoader = React.useCallback(() => {
         if (!!currentUser?.uid) {
             axios.get(`${CART_API}/${currentUser?.uid}`)

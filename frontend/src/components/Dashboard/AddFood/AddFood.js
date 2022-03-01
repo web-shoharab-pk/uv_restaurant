@@ -3,19 +3,12 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import React from 'react';
 import { useForm } from "react-hook-form";
-import toast from 'react-hot-toast';
 import { useMutation } from 'react-query';
-import { addFood } from '../../../apis/fetcher';
+import { addFood } from '../../../apis/poster';
 
 const AddFood = () => {
     const { register, setValue, getValues, handleSubmit, reset, formState: { errors } } = useForm();
-
-    const { mutateAsync } = useMutation(addFood, {
-        onSuccess: (food) => {
-            reset();
-            toast.success(food.name + " added successfully!")
-        }, onError: (error) => { toast.error(error.message) }
-    });
+    const { mutateAsync } = useMutation(addFood, { onSuccess: () => reset() });
 
     return (
         <Paper>

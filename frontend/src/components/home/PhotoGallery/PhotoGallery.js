@@ -18,8 +18,8 @@ import styles from './styles.module.css';
 const photos = [
     {
         src: image1,
-        width: 1,
-        height: 1
+        width: 4,
+        height: 3
       },
       {
         src: image2,
@@ -28,8 +28,8 @@ const photos = [
       },
       {
         src: image3,
-        width: 1,
-        height: 1
+        width: 4,
+        height: 3
       },
       {
         src: image4,
@@ -38,8 +38,8 @@ const photos = [
       },
       {
         src: image5,
-        width: 1,
-        height: 1
+        width: 4,
+        height: 3
       },
       {
         src: image6,

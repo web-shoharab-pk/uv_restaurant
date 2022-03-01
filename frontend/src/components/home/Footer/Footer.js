@@ -11,11 +11,12 @@ const Footer = () => {
                 <div className="row">
                     <div className="col-lg-4 col-md-4 col-sm-12">
                         <div className={style.footerMid}>
-                            <h4>Friends Foods</h4>
+                        <Avatar style={{ width: 100, height: 100 }} alt="Remy Sharp" src={logo} />
+                        <br />
                             <p className={style.restaurant_bio}>
-                                Welcome to Our Software. Company About here.
+                                Welcome to Our Software.
                             </p>
-                            <Avatar style={{ width: 100, height: 100 }} alt="Remy Sharp" src={logo} />
+                          
                         </div>
                     </div>
                     <div className="col-lg-4 col-md-4 col-sm-12">

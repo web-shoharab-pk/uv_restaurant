@@ -1,10 +1,10 @@
-import * as React from 'react';
 import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { Fragment } from 'react';
 import Title from './Title';
 
 // Generate Order Data
@@ -54,7 +54,7 @@ function preventDefault(event) {
 
 export default function Orders() {
   return (
-    <React.Fragment>
+    <Fragment>
       <Title>Recent Orders</Title>
       <Table size="small">
         <TableHead>
@@ -81,6 +81,6 @@ export default function Orders() {
       <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
         See more orders
       </Link>
-    </React.Fragment>
+    </Fragment>
   );
 }

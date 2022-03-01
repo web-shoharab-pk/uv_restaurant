@@ -1,27 +1,18 @@
-import axios from "axios";
-import toast from "react-hot-toast";
-import { FOOD_API, IMAGEBB_API } from "./apis";
-
-// axios.defaults.baseURL = baseURL;
+import { FOOD_API, ORDER_API, REVIEW_API } from "./apis";
+import axios from "./axiosConfig";
 
 export const getFoods = () => axios.get(`${FOOD_API}/all`).then((res) => res.data.foods);
 
-export const addFood = async (data) => {
-    try {
-        if (data.photo[0]) {
-            const imageData = new FormData();
-            imageData.set('key', IMAGEBB_API);
-            imageData.append('image', data.photo[0]);
+export const getAllOrder = () => axios.get(`${ORDER_API}/all`).then((res) => res.data.order);
 
-            const res = await axios.post('https://api.imgbb.com/1/upload', imageData);
-            toast.success('Successfully Photo Uploaded!')
-            data.photo = res.data.data.display_url;
+export const getAllReview = () => axios.get(`${REVIEW_API}/all`).then((res) => res.data.reviews)
+
+export const getMyOrder = async (currentUser) => {
+    const res = await axios.post(`${ORDER_API}/user`, {
+        orderedBy: {
+            name: currentUser?.displayName,
+            userId: currentUser?.uid
         }
-
-        const response = await axios.post(`${FOOD_API}/new`, data)
-
-        return response.data.food;
-    } catch (error) {
-        throw new Error(error.message)
-    }
-}
+    })
+    return res.data.order;
+};

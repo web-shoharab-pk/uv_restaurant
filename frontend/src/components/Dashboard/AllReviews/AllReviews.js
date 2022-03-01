@@ -1,36 +1,23 @@
 import { Container } from '@mui/material';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { REVIEW_API } from '../../../apis/apis';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { getAllReview } from '../../../apis/fetcher';
 import TableLoader from '../../Skeleton/TableLoader';
 import AllReviewsTable from './AllReviewsTable';
 
 const AllReviews = () => {
-    const [reviews, setReviews] = useState([])
 
-    const handleLoadReview = () => {
-        axios.get(`${REVIEW_API}/all`)
-        .then((res) => {
-            if (res.data.success) {
-                setReviews(res.data.reviews)
-            }
-        })
-        .catch((err) => {
-            setReviews([])
-        })
-    }
-
-    useEffect(() => {
-        handleLoadReview()
-    }, [])
+    const { data, isLoading, refetch } = useQuery("reviews", getAllReview)
 
     return (
         <Container>
             {
-                reviews.length > 0 ?
-                    <AllReviewsTable reviews={reviews} handleLoadReview={handleLoadReview} />
+                isLoading ? <TableLoader />
                     :
-                    <TableLoader />
+                    data.length > 0 ?
+                        <AllReviewsTable reviews={data} handleLoadReview={refetch} />
+                        :
+                        <h3>No Found Any Review!</h3>
             }
 
         </Container>

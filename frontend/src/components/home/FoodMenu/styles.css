@@ -64,3 +64,40 @@
     width: 100%;
     text-align: center;
   }
+  .actionBtn{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  @media (max-width: 750px) {
+    .actionBtn{
+      display: block;
+    }
+    .menuBtn{
+      display: block;
+    }
+    .react-tabs__tab-list {
+      display: flex;
+      flex-direction: column;
+      width: 150px;
+      max-Width: 100%;
+      margin: 0;
+      padding: 0;
+      color: white;
+      background: #41403f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+    }
+    
+    .react-tabs__tab {
+      width: 150px;
+      height: 50px;
+      list-style: none;
+      padding: 12px 0px;
+      margin: 10px 0;
+      cursor: pointer;
+      color: #bbb; 
+      text-align: center;
+    }
+  }

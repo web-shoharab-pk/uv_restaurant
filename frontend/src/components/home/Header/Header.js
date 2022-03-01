@@ -1,12 +1,13 @@
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+// import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+// import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import MobileStepper from '@mui/material/MobileStepper';
+// import Button from '@mui/material/Button';
+// import MobileStepper from '@mui/material/MobileStepper';
 import Paper from '@mui/material/Paper';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import slider1 from './../../../resources/image/slider1.webp';
@@ -31,7 +32,7 @@ const images = [
         label: "Granny is a restaurant, bar and coffee roastery located on Egypt. We have awesome recipes and the most talented chefs in town!",
         h4: "Made With Love",
         h2: "Fresh Ingredient, Tasty Meals",
-        buttonContent: "View Menu"
+        buttonContent: "Reserve Now"
     },
     { 
         imgPath: slider3,
@@ -46,18 +47,20 @@ const Header = () => {
 
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
-    const maxSteps = images.length;
+    // const maxSteps = images.length;
 
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
+    // const handleNext = () => {
+    //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    // };
 
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
+    // const handleBack = () => {
+    //     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    // };
 
     const handleStepChange = (step) => {
-        setActiveStep(step);
+        setTimeout(() => {
+            setActiveStep(step);
+        }, 5000); 
     };
 
     return (
@@ -88,7 +91,7 @@ const Header = () => {
                         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                         index={activeStep}
                         onChangeIndex={handleStepChange}
-                        enableMouseEvents
+                        enableMouseEvents 
                     >
                         {images.map((step, index) => (
                             <div key={step.label}>
@@ -114,7 +117,9 @@ const Header = () => {
                                             <h4 className={style.header_h4}>{step.h4}</h4>
                                             <h2 className={style.header_h2}>{step.h2}</h2>
                                             <Typography className={style.header_label}>{step.label}</Typography> 
-                                            <button className={style.header_btn}>{step.buttonContent}</button>
+                                            <Link to="/reservation">
+                                            <button  className={style.header_btn}>{step.buttonContent}</button>
+                                            </Link>
                                             </div>
                                         </div>
                                     </Box>
@@ -124,7 +129,7 @@ const Header = () => {
 
                         ))}
                     </AutoPlaySwipeableViews>
-                    <MobileStepper
+                    {/* <MobileStepper
                         steps={maxSteps}
                         position="static"
                         activeStep={activeStep}
@@ -150,7 +155,7 @@ const Header = () => {
                                 )}
                             </Button>
                         }
-                    />
+                    /> */}
                 </Box>
             </div>
         </div>

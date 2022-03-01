@@ -15,7 +15,7 @@ const FoodMenu = () => {
         <div className="container"> 
         <br />
             <h2 style={{color: '#fff'}}>
-                Popular <span style={{ color: "#fc5200" }}>Foods</span>
+              <span style={{ color: "#fc5200" }}>Food Menu</span>
             </h2>
             <Tabs>
                 <TabList>
