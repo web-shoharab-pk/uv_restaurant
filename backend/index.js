@@ -6,7 +6,7 @@ const connectDatabase = require("./config/database");
 
 var admin = require("firebase-admin");
 
-var serviceAccount = require("./config/friends-foods-firebase-adminsdk.json");
+var serviceAccount = require("./config/friends-food-uv-firebase-adminsdk-l6pjo-62527fb0c0.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)

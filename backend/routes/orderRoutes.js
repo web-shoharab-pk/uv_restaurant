@@ -20,7 +20,7 @@ router.get('/all', async (req, res) => {
     const order = await Order.find();
 
     if(!order) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: 'Order not found!'
         })
@@ -36,7 +36,7 @@ router.post('/user', async (req, res) => {
 
     const order = await Order.find(req.body);
     if(!order.length) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: 'Order not found!'
         })
@@ -54,7 +54,7 @@ router.delete('/delete/:id', async (req, res) => {
     const order = await Order.findById(req.params.id);
 
     if(!order) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: 'Order not found!'
         })
@@ -72,7 +72,7 @@ router.put('/:id', async (req, res) => {
 
     let order = await Order.findById(req.params.id);
     if(!order) {
-        res.status(500).json({success: false})
+        res.status(404).json({success: false})
     } else {
         order = await Order.findByIdAndUpdate(req.params.id, req.body, {
             new: true,

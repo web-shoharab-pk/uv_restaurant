@@ -17,7 +17,7 @@ router.get('/all', async (req, res) => {
     const foods = await Food.find();
 
     if(!foods) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: 'Data not found!'
         });
@@ -35,7 +35,7 @@ router.post('/category', async (req, res) => {
     const foods = await Food.find(req.body);
 
     if(!foods) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: 'Data not found!'
         });
@@ -53,7 +53,7 @@ router.delete('/delete/:id', async (req, res) => {
     const food = await Food.findById(req.params.id);
 
     if(!food) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: 'Data not found!'
         });
@@ -72,7 +72,7 @@ router.put('/update/:id', async (req, res) => {
     let food = await Food.findById(req.params.id);
 
     if(!food) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: 'Data not found!'
         });

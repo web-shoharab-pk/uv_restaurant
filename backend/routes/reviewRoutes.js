@@ -18,7 +18,7 @@ router.get('/all', async (req, res) => {
     const reviews = await Review.find();
 
     if (!reviews) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: 'Review not found!'
         })
@@ -35,7 +35,7 @@ router.post('/user', async (req, res) => {
     const reviews = await Review.findOne(req.body);
 
     if (!reviews) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: 'Review not found!'
         })
@@ -52,7 +52,7 @@ router.delete('/delete/:id', async (req, res) => {
 
     const review = await Review.findById(req.params.id); 
     if (!review) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: 'Review not found!'
         })
@@ -71,7 +71,7 @@ router.put('/update/:id', async (req, res) => {
 
     let review = await Review.findById(req.params.id);
     if (!review) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: 'Review not found!'
         })

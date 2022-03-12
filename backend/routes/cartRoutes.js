@@ -55,7 +55,7 @@ router.delete('/:id', async (req, res) => {
     const food = await Cart.findByIdAndDelete(req.params.id);
 
     if(!food) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: "Food not found!"
         })
@@ -71,7 +71,7 @@ router.delete('/user/:userId', async (req, res) => {
  
     const food = await Cart.deleteMany(req.params)
     if(!food) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: "Cart not found!"
         })
